@@ -2,7 +2,6 @@ package com.example.jpaannounce.controller;
 
 import com.example.jpaannounce.entity.Announce;
 import com.example.jpaannounce.service.AnnounceService;
-import org.apache.catalina.LifecycleState;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,7 @@ public class AnnounceController {
 
     @PostMapping("/bulk")
     public ResponseEntity createBulkAnnounces(@RequestBody List<Announce> announces) {
-        LOGGER.debug("Создание объявлений (bulk): {}", announces);
+        LOGGER.debug("Creating bulk announces. Count: {}", announces.size());
         announceService.createBulkAnnounces(announces);
         return ResponseEntity.ok("OK!");
     }
