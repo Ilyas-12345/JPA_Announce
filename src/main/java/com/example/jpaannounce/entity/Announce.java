@@ -23,6 +23,7 @@ import java.util.List;
         private List<StudentGroup> studentGroup;
 
         public Announce() {
+            // This method is intentionally left empty as it serves as a placeholder for future implementation.
         }
 
         public Long getId() {

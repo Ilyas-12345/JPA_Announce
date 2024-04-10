@@ -2,6 +2,7 @@ package com.example.jpaannounce.service;
 
 import com.example.jpaannounce.component.Cach;
 import com.example.jpaannounce.entity.Announce;
+import com.example.jpaannounce.model.AnnounceModel;
 import com.example.jpaannounce.repository.AnnounceRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,9 @@ public class AnnounceService {
         return announceRepository.save(announce);
     }
 
-    public com.example.jpaannounce.model.Announce getAnnounce(Long id) {
+    public AnnounceModel getAnnounce(Long id) {
         Announce announce = announceRepository.findById(id).get();
-        return com.example.jpaannounce.model.Announce.toModel(announce);
+        return AnnounceModel.toModel(announce);
     }
 
     public Long delete(Long id) {
@@ -35,17 +36,17 @@ public class AnnounceService {
             createAnnounce(announce);
         }
     }
-    /*public List<Announce> getAnnouncesByStudent(Long departmentId) {
+    /*public List<AnnounceModel> getAnnouncesByStudent(Long departmentId) {
         String cacheKey = "announces_" + departmentId;
 
         // Проверяем, есть ли результаты запроса в кэше
         Object cachedObject = cache.get(cacheKey);
         if (cachedObject instanceof List<?>) {
-            return (List<Announce>) cachedObject;
+            return (List<AnnounceModel>) cachedObject;
         }
 
         // Если результаты не найдены в кэше, выполняем запрос к базе данных
-        List<Announce> announces = announceRepository.findByStudentDepartmentId(departmentId);
+        List<AnnounceModel> announces = announceRepository.findByStudentDepartmentId(departmentId);
 
         // Помещаем результаты запроса в кэш
         cache.put(cacheKey, announces);

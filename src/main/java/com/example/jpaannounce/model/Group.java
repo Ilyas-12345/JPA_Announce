@@ -2,6 +2,8 @@ package com.example.jpaannounce.model;
 
 import com.example.jpaannounce.entity.StudentGroup;
 
+import java.util.Objects;
+
 public class Group {
     private Long id;
     private int groupId;
@@ -40,5 +42,23 @@ public class Group {
 
     public void setGroupId(int groupId) {
         this.groupId = groupId;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Group other = (Group) obj;
+        return Objects.equals(id, other.id)
+                && Objects.equals(groupName, other.groupName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, groupName);
     }
 }

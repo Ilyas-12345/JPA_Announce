@@ -47,7 +47,7 @@ public class AnnounceController {
     /*@GetMapping("/DepId/{DepId}")
     public ResponseEntity getAnnouncesByStudentDepartmentId(@PathVariable Long DepId) {
         try {
-            List<Announce> announces = announceService.getAnnouncesByStudent(DepId);
+            List<AnnounceModel> announces = announceService.getAnnouncesByStudent(DepId);
             return ResponseEntity.ok(announces);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error!");
