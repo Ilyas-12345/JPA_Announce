@@ -1,10 +1,8 @@
 package com.example.jpaannounce.service;
 
-import com.example.jpaannounce.component.Cach;
 import com.example.jpaannounce.entity.Announce;
 import com.example.jpaannounce.model.AnnounceModel;
 import com.example.jpaannounce.repository.AnnounceRepository;
-import com.example.jpaannounce.service.AnnounceService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
