@@ -43,14 +43,4 @@ public class AnnounceController {
         LOGGER.debug("Удаление объявления с id: {}", id);
         return ResponseEntity.ok(announceService.delete(id));
     }
-    //
-    /*@GetMapping("/DepId/{DepId}")
-    public ResponseEntity getAnnouncesByStudentDepartmentId(@PathVariable Long DepId) {
-        try {
-            List<AnnounceModel> announces = announceService.getAnnouncesByStudent(DepId);
-            return ResponseEntity.ok(announces);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error!");
-        }
-    }*/
 }

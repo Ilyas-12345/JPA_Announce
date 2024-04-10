@@ -36,21 +36,4 @@ public class AnnounceService {
             createAnnounce(announce);
         }
     }
-    /*public List<AnnounceModel> getAnnouncesByStudent(Long departmentId) {
-        String cacheKey = "announces_" + departmentId;
-
-        // Проверяем, есть ли результаты запроса в кэше
-        Object cachedObject = cache.get(cacheKey);
-        if (cachedObject instanceof List<?>) {
-            return (List<AnnounceModel>) cachedObject;
-        }
-
-        // Если результаты не найдены в кэше, выполняем запрос к базе данных
-        List<AnnounceModel> announces = announceRepository.findByStudentDepartmentId(departmentId);
-
-        // Помещаем результаты запроса в кэш
-        cache.put(cacheKey, announces);
-
-        return announces;
-    }*/
 }

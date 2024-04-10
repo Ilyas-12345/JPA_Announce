@@ -18,6 +18,10 @@ public class StudentGroupController {
     @Autowired
     public StudentGroupService studentGroupService;
 
+    public StudentGroupController(StudentGroupService studentGroupService) {
+        this.studentGroupService = studentGroupService;
+    }
+
     @PostMapping("/create")
     public ResponseEntity createStudentGroup(@RequestBody StudentGroup studentGroup,
                                              @RequestParam Long groupId) {
