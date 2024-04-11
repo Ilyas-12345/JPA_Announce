@@ -12,6 +12,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -71,5 +73,43 @@ public class StudentGroupServiceTest {
         assertEquals(updatedStudentGroup.getGroupName(), existingStudentGroup.getGroupName());
         verify(studentGroupRepository, times(1)).findById(id);
         verify(studentGroupRepository, times(1)).save(existingStudentGroup);
+    }
+
+    @Test
+    public void testGetStudentGroupsByGroupIdFromCache() {
+        int groupId = 1;
+        String cacheKey = "studentGroups_" + groupId;
+        List<StudentGroup> expectedStudentGroups = new ArrayList<>();
+        expectedStudentGroups.add(new StudentGroup());
+
+        when(cache.containsKey(cacheKey)).thenReturn(true);
+        when(cache.get(cacheKey)).thenReturn(expectedStudentGroups);
+
+        List<StudentGroup> result = studentGroupService.getStudentGroupsByGroupId(groupId);
+
+        assertEquals(expectedStudentGroups, result);
+        verify(cache, times(1)).containsKey(cacheKey);
+        verify(cache, times(1)).get(cacheKey);
+        verify(studentGroupRepository, never()).findByGroupId(groupId);
+        verify(cache, never()).put(cacheKey, expectedStudentGroups);
+    }
+
+    @Test
+    public void testGetStudentGroupsByGroupIdFromRepository() {
+        int groupId = 2;
+        String cacheKey = "studentGroups_" + groupId;
+        List<StudentGroup> expectedStudentGroups = new ArrayList<>();
+        expectedStudentGroups.add(new StudentGroup());
+
+        when(cache.containsKey(cacheKey)).thenReturn(false);
+        when(studentGroupRepository.findByGroupId(groupId)).thenReturn(expectedStudentGroups);
+
+        List<StudentGroup> result = studentGroupService.getStudentGroupsByGroupId(groupId);
+
+        assertEquals(expectedStudentGroups, result);
+        verify(cache, times(1)).containsKey(cacheKey);
+        verify(cache, never()).get(cacheKey);
+        verify(studentGroupRepository, times(1)).findByGroupId(groupId);
+        verify(cache, times(1)).put(cacheKey, expectedStudentGroups);
     }
 }
